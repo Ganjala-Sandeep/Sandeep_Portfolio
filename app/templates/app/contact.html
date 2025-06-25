@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+body {
+        margin: 0;
+        padding: 0;
+        background: url("{% static 'app/images/background_image.jpg' %}") no-repeat center center fixed;
+        background-size: cover;
+        font-family: 'Segoe UI', sans-serif;
+        color: #000; /* changed to black */
+    }
+  .contact-section {
+  background: url("{% static 'app/images/background_image.jpg' %}") no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed; /* This keeps the background fixed */
+  color: #000; /* changed to black */
+  padding: 60px 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+
+  .contact-container {
+    max-width: 1100px;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+  }
+
+  .contact-icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px; /* spacing between icons */
+  }
+
+  .icon-link {
+    background-color: #f0f0f0; /* milky white background */
+    color: #000 !important; /* changed to black */
+    border-radius: 20px;
+    padding: 30px 0;
+    width: 180px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow:
+      4px 4px 10px rgba(0,0,0,0.1),
+      -4px -4px 10px rgba(255,255,255,0.7);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .icon-link:hover {
+    transform: translateY(-6px);
+    box-shadow:
+      6px 6px 15px rgba(0,0,0,0.15),
+      -6px -6px 15px rgba(255,255,255,0.8);
+  }
+
+  .icon-link i {
+    font-size: 3rem;
+    filter: grayscale(100%) brightness(80%); /* monochrome effect */
+    margin-bottom: 14px;
+  }
+
+  .contact-text {
+    font-size: 1.1rem;
+    user-select: none;
+    color: #000; /* changed to black */
+  }
+
+  .footer-text {
+    margin-top: 40px;
+    color: #000; /* changed to black */
+    font-style: italic;
+  }
+
+  @media (max-width: 575.98px) {
+    .icon-link {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+</style>
+
+<div class="contact-section">
+  <div class="contact-container">
+    <h2 style="font-weight: 600; margin-bottom: 40px;">Let's Connect</h2>
+
+    <div class="contact-icons">
+
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/sandeep-ganjala-7a178028a/" target="_blank" class="icon-link">
+        <i class="bi bi-linkedin"></i>
+      </a>
+
+      <!-- Email -->
+<a href="mailto:2200031276cseh@gmail.com" class="icon-link" aria-label="Send Email to Sandeep">        <i class="bi bi-envelope-fill"></i>
+      </a>
+
+      <!-- Phone -->
+      <a href="tel:+917032131899" class="icon-link">
+        <i class="bi bi-telephone-fill"></i>
+      </a>
+
+      <!-- GitHub -->
+      <a href="https://github.com/Ganjala-Sandeep" target="_blank" class="icon-link">
+        <i class="bi bi-github"></i>
+      </a>
+
+    </div>
+
+    <p class="footer-text">Crafted with passion | ©{{ year }} sandeep Ganjala </p>
+  </div>
+</div>
+{% endblock %}

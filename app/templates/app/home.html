@@ -1,0 +1,287 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Google Font for premium heading look -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background: url("{% static 'app/images/face.jpg' %}") no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', sans-serif;
+  color: #222;
+}
+
+.hero-section {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background: transparent;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 750px;
+  padding-left: 55px;
+  color: #000;
+}
+
+.hero-content::after {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  background: #5f9df7;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.35;
+  bottom: -50px;
+  right: -60px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 3D object styles */
+.tech-3d-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  perspective: 1500px;
+  user-select: none;
+}
+
+.tech-3d-object {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #3b3b98, #70a1ff);
+  box-shadow: 0 15px 25px rgba(59, 59, 152, 0.3),
+              inset 0 0 10px rgba(112, 161, 255, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 36px;
+  font-weight: 700;
+  text-shadow: 0 0 4px #00ffff;
+  transform-style: preserve-3d;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+  opacity: 0.4;
+}
+
+/* Adjusted positions */
+.tech-3d-object.obj1 {
+  top: 80px;
+  left: 20px;
+  margin-top:30px;
+  animation: floatRotate3D1 12s infinite;
+}
+
+.tech-3d-object.obj2 {
+  top: 220px;
+  left: 400px;
+  margin-top:60px;
+  animation: floatRotate3D2 14s infinite;
+}
+
+.tech-3d-object.obj3 {
+  bottom: 60px;
+  left: 200px;
+  animation: floatRotate3D3 13s infinite;
+}
+
+/* Moved object-4 near text (to the right of "Sandeep") */
+.tech-3d-object.obj4 {
+  top: 260px;
+  left: 400px;
+  animation: floatRotate3D4 11s infinite;
+  opacity: 0.6;
+}
+
+/* Animations */
+@keyframes floatRotate3D1 {
+  0%, 100% { transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg); }
+  50% { transform: translate3d(20px, 10px, 30px) rotateX(180deg) rotateY(360deg); }
+}
+
+@keyframes floatRotate3D2 {
+  0%, 100% { transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg); }
+  50% { transform: translate3d(-25px, 15px, 25px) rotateX(360deg) rotateY(180deg); }
+}
+
+@keyframes floatRotate3D3 {
+  0%, 100% { transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg); }
+  50% { transform: translate3d(15px, -10px, 20px) rotateX(270deg) rotateY(90deg); }
+}
+
+@keyframes floatRotate3D4 {
+  0%, 100% { transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg); }
+  50% { transform: translate3d(-20px, 20px, 15px) rotateX(90deg) rotateY(270deg); }
+}
+
+.hero-content h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 15px;
+  margin-top: 40px;
+  color: #000;
+  position: relative;
+  z-index: 4;
+}
+
+.hero-content .typing {
+  font-size: 1.9rem;
+  font-weight: 400;
+  margin-bottom: 25px;
+  color: #000;
+}
+
+.hero-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 500px;
+  color: #111;
+  margin-bottom: 25px;
+}
+
+.hero-buttons .btn {
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  margin-right: 15px;
+  margin-top: 10px;
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1),
+              -6px -6px 12px rgba(255, 255, 255, 0.6);
+  border: none;
+  color: #000;
+  transition: all 0.3s ease;
+}
+
+.hero-buttons .btn:hover {
+  background: linear-gradient(145deg, #d4d4d4, #f1f1f1);
+  box-shadow: inset 4px 4px 6px rgba(0, 0, 0, 0.15),
+              inset -4px -4px 6px rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+  color: #000;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .hero-content {
+    padding-left: 0;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-content .typing {
+    font-size: 1.4rem;
+  }
+
+  .hero-buttons .btn {
+    margin: 10px 5px;
+  }
+
+  .tech-3d-container {
+    display: none;
+  }
+
+  .hero-content::after {
+    display: none;
+  }
+}
+</style>
+
+<!-- HTML Content -->
+<div class="hero-section">
+  <div class="hero-overlay"></div>
+
+  <div class="tech-3d-container" aria-hidden="true">
+    <div class="tech-3d-object obj1">⌘</div>
+    <div class="tech-3d-object obj3">⎋</div>
+    <div class="tech-3d-object obj4">⬢</div>
+
+
+  </div>
+
+  <div class="hero-content">
+    <h1>Hi, I'm <span>Sandeep Ganjala</span></h1>
+    <div class="typing">I'm a <span id="typed-role"></span></div>
+    <p>A passionate student and digital enthusiast who enjoys building things that matter.</p>
+    <div class="hero-buttons d-flex flex-wrap">
+      <a href="{% static 'app/files/Sandeep_Resume.pdf' %}" class="btn me-3 mb-2" target="_blank">View Resume</a>
+      <a href="{% url 'projects' %}" class="btn mb-2">View Projects</a>
+    </div>
+  </div>
+</div>
+
+<!-- Typed.js Script -->
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script>
+  const typed = new Typed("#typed-role", {
+    strings: [
+      "Full Stack Developer",
+      "Digital Marketer",
+      "Filmmaker",
+      "Cinematographer",
+      "Business Strategist"
+    ],
+    typeSpeed: 60,
+    backSpeed: 40,
+    loop: true,
+    showCursor: true,
+    cursorChar: '|'
+  });
+</script>
+
+
+
+{% endblock %}

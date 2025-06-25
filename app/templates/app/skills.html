@@ -1,0 +1,232 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  {{ block.super }}
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    margin-top: 40px;
+    background: url("{% static 'app/images/background_image.jpg' %}") no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+    color: #222;
+  }
+
+  .skills-section {
+    padding: 60px 20px;
+    min-height: 100vh;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: #222;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .skill-card {
+    position: relative;
+    border-radius: 15px;
+    padding: 30px 20px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    text-align: center;
+    transition: transform 0.6s ease, box-shadow 0.6s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  .skill-card:hover {
+    transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    z-index: 2;
+  }
+
+  .skill-card h5 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    color: #222;
+    transform: translateZ(20px);
+  }
+
+  .progress-container {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .skill-card:hover .progress-container {
+    opacity: 1;
+  }
+
+  .progress-bar {
+    flex: 1;
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    border-radius: 5px;
+    background-color: #00c87b;
+    box-shadow: 0 0 5px #00c87b;
+    width: 0;
+    transition: width 1s ease;
+  }
+
+  .skill-card:hover .progress-fill {
+    width: var(--progress);
+  }
+
+  .progress-number {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    color: #222;
+    min-width: 40px;
+    text-align: left;
+    font-size: 1rem;
+  }
+</style>
+
+<div class="skills-section">
+  <div class="container">
+    <h2>My Skills</h2>
+    <div class="row">
+      <!-- Each skill-card is a column -->
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="skill-card" style="--progress: 90%;">
+          <h5>C Programming</h5>
+          <div class="progress-container">
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <span class="progress-number">90%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="skill-card" style="--progress: 80%;">
+          <h5>Java</h5>
+          <div class="progress-container">
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <span class="progress-number">80%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="skill-card" style="--progress: 85%;">
+          <h5>Python</h5>
+          <div class="progress-container">
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <span class="progress-number">85%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="skill-card" style="--progress: 70%;">
+          <h5>HTML & CSS</h5>
+          <div class="progress-container">
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <span class="progress-number">70%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="skill-card" style="--progress: 90%;">
+          <h5>JavaScript</h5>
+          <div class="progress-container">
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <span class="progress-number">60%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="skill-card" style="--progress: 90%;">
+          <h5>AWS</h5>
+          <div class="progress-container">
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <span class="progress-number">60%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="skill-card" style="--progress: 90%;">
+          <h5>Digital Marketing</h5>
+          <div class="progress-container">
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <span class="progress-number">90%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="skill-card" style="--progress: 90%;">
+          <h5>Business Analysis & Development</h5>
+          <div class="progress-container">
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <span class="progress-number">80%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="skill-card" style="--progress: 90%;">
+          <h5>Cinematography</h5>
+          <div class="progress-container">
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <span class="progress-number">90%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="skill-card" style="--progress: 90%;">
+          <h5>Video Editing</h5>
+          <div class="progress-container">
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <span class="progress-number">90%</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6 col-sm-12">
+        <div class="skill-card" style="--progress: 90%;">
+          <h5>Graphic Designing</h5>
+          <div class="progress-container">
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <span class="progress-number">90%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

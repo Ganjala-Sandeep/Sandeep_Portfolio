@@ -1,0 +1,319 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  {{ block.super }}
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: url("{% static 'app/images/background_image.jpg' %}") no-repeat center center fixed;
+        background-size: cover;
+        font-family: 'Poppins', sans-serif;
+        color: #222;
+        perspective: 1200px;
+        background-attachment: fixed;
+    }
+
+    .projects-section {
+        max-width: 1100px;
+        margin: 0 auto 80px auto;
+        transform-style: preserve-3d;
+        padding-top: 30px;
+    }
+
+    .section-heading {
+        font-family: 'Playfair Display', serif;
+        font-weight: 600;
+        font-size: 2.8rem;
+        color: #2b2b2b;
+        text-align: center;
+        margin: 80px 0 40px 0;
+        transform: translateZ(20px);
+    }
+
+    .technical-projects,
+    .marketing-projects {
+        padding: 80px 20px 60px 20px;
+        background: rgba(255, 255, 255, 0.85);
+        border-radius: 20px;
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1), inset 0 0 40px rgba(255, 255, 255, 0.7);
+        margin-bottom: 100px;
+    }
+
+    .project-card {
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 15px;
+        box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.1), -8px -8px 15px rgba(255, 255, 255, 0.8);
+        overflow: hidden;
+        transition: box-shadow 0.3s ease, transform 0.3s ease;
+        transform-style: preserve-3d;
+        cursor: pointer;
+        color: #333;
+        margin-bottom: 40px;
+        padding: 20px;
+    }
+
+    .project-card:hover {
+        box-shadow: 12px 12px 30px rgba(0, 0, 0, 0.2), -12px -12px 30px rgba(255, 255, 255, 0.9);
+        transform: scale(1.03);
+    }
+
+    .card-img-top {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 15px;
+        transition: transform 0.3s ease;
+    }
+
+    .project-card:hover .card-img-top {
+        transform: scale(1.05);
+    }
+
+    .card-body {
+        padding: 1.5rem;
+        transform: translateZ(30px);
+    }
+
+    .card-title {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        font-size: 1.6rem;
+        color: #111;
+        margin-bottom: 14px;
+    }
+
+    .card-text,
+    .tech-used {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 1rem;
+        color: #444;
+        margin-bottom: 10px;
+    }
+
+    .premium-view-btn {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+        position: relative;
+        display: inline-block;
+        margin-top: 15px;
+        margin-right: 12px;
+        padding: 10px 28px;
+        font-size: 1rem;
+        color: #444;
+        background-color: #eaeaea;
+        border: 1.8px solid #ccc;
+        border-radius: 28px;
+        cursor: pointer;
+        box-shadow: inset 2px 2px 5px #f5f5f5, inset -2px -2px 5px #d5d5d5;
+        text-decoration: none;
+        transition: all 0.25s ease;
+    }
+
+    .premium-view-btn::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -75%;
+        width: 50%;
+        height: 200%;
+        background: linear-gradient(120deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0) 100%);
+        transform: skewX(-25deg);
+        transition: left 0.6s ease;
+        pointer-events: none;
+    }
+
+    .premium-view-btn:hover::before {
+        left: 125%;
+    }
+
+    .premium-view-btn:hover {
+        background-color: #d6d6d6;
+        color: #222;
+        box-shadow: inset 3px 3px 6px #c8c8c8, inset -3px -3px 6px #eaeaea;
+    }
+
+    .non-tech-section {
+        padding: 60px 40px 80px 40px;
+        background: rgba(245, 245, 250, 0.95);
+        border-radius: 30px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        perspective: 1500px;
+    }
+
+    .non-tech-section h3 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 600;
+        font-size: 2.8rem;
+        text-align: center;
+        margin-bottom: 50px;
+        color: #111;
+    }
+
+    .non-tech-card {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        position: relative;
+        background: linear-gradient(145deg, #fafafa, #e6e6e6);
+        border-radius: 25px;
+        padding: 30px 35px;
+        box-shadow: inset 0 2px 10px rgba(255, 255, 255, 0.8), 0 10px 25px rgba(100, 100, 100, 0.1), 0 4px 8px rgba(0, 0, 0, 0.05);
+        transition: transform 0.6s ease, box-shadow 0.6s ease;
+        cursor: default;
+        overflow: hidden;
+        margin-bottom: 40px;
+    }
+
+    .non-tech-card h5 {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        margin-bottom: 20px;
+        font-size: 1.6rem;
+        color: #0d1137;
+    }
+
+    .non-tech-card p,
+    .non-tech-card a {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #3a3f58;
+    }
+
+    .non-tech-card a {
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .non-tech-card a:hover {
+        color: #222;
+        text-decoration: underline;
+    }
+
+    .non-tech-img {
+        width: 100%;
+        max-height: 280px;
+        height: 280px;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        margin-bottom: 15px;
+        transition: transform 0.3s ease;
+    }
+
+    .nuvvoadbutham-img {
+        object-position: center 73%;
+    }
+
+    .non-tech-card:hover .non-tech-img {
+        transform: scale(1.05);
+    }
+
+    .non-tech-card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(120deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%);
+        transform: rotate(25deg) translateX(-100%);
+        transition: transform 0.7s ease;
+        pointer-events: none;
+        z-index: 1;
+        border-radius: 25px;
+    }
+
+    .non-tech-card:hover::before {
+        transform: rotate(25deg) translateX(100%);
+    }
+
+    .non-tech-card:hover {
+        transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+        box-shadow: inset 0 4px 15px rgba(255, 255, 255, 0.9), 0 15px 40px rgba(50, 50, 93, 0.25), 0 8px 16px rgba(0, 0, 0, 0.15);
+        z-index: 10;
+    }
+</style>
+
+<div class="projects-section container">
+    <h2 class="section-heading">My Projects</h2>
+
+    <!-- Technical Projects -->
+    <section class="technical-projects">
+        <div class="project-card">
+            <img src="{% static 'app/images/img_5.png' %}" class="card-img-top" alt="Project 1">
+            <div class="card-body">
+                <h5 class="card-title">Tourism and Hospitality Management System</h5>
+                <p class="card-text">Developed a user-friendly system for booking travel tickets and hotels in one place, simplifying trip planning.</p>
+                <p class="tech-used">Technologies Used: Django,Bootstrap,PostreSQL</p>
+                <a href="#" class="premium-view-btn"  target="_blank">View Code</a>
+                <a href="https://www.linkedin.com/pulse/tourist-hospitality-management-system-sandeep-ganjala/?trackingId=VH%2FG8If4nHY0sNuw3pwAKg%3D%3D" class="premium-view-btn" target="_blank">Document</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <img src="{% static 'app/images/img_6.png' %}" class="card-img-top" alt="Project 2">
+            <div class="card-body">
+                <h5 class="card-title">Student Assignment Submission And Grading System</h5>
+                <p class="card-text">A web-based Student Assignment Submission and Grading System built using JFSD, streamlining the submission, evaluation, and feedback process for students and faculty.</p>
+                <p class="tech-used">Technologies Used: Java, JSP, Servlets, JDBC, MySQL</p>
+                <a href="https://github.com/Ganjala-Sandeep/Online-Assignment-Submission-And-Grading-System" class="premium-view-btn" target="_blank">View Code</a>
+                <a href="https://www.linkedin.com/pulse/online-assignment-submission-grading-system-sandeep-ganjala-1h2rf/?trackingId=piysWRR9R6qDzg736hx0Kw%3D%3D" class="premium-view-btn" target="_blank">Document</a>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Extra Curricular Projects -->
+    <section class="non-tech-section">
+        <h3>Extra Curricular Projects</h3>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="non-tech-card">
+                    <img src="{% static 'app/images/katha_film.png' %}" alt="The Katha" class="non-tech-img" />
+                    <h5>Short Film: The Katha</h5>
+<p>Written and Directed <em>The Katha</em>, a student short film rooted in regional storytelling. Successfully managed the entire project from start to finish with a passionate campus-based crew, trained new filmmakers, and created a strong collaborative learning environment for beginners in filmmaking.</p>
+                    <a href="https://youtu.be/Tqhsb7ZTDFU?feature=shared" target="_blank" class="premium-view-btn"><span>View</span></a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="non-tech-card">
+                    <img src="{% static 'app/images/nuvvoadbuthm_thumbail_2.JPG' %}" alt="Nuvvo Adbutham" class="non-tech-img nuvvoadbutham-img" />
+                    <h5>Original Song – Nuvvo Adbutham (Ongoing)</h5>
+                    <p>As the writer, director, and cinematographer of <em>Nuvvo Adbutham</em>, I’m shaping an original Telugu song that weaves heartfelt lyrics with captivating visuals. The project is underway with talented local artists, and a teaser will be released soon.</p>
+                    <a href="https://youtu.be/oMhVNqluzNE?feature=shared" class="premium-view-btn"><span>View</span></a>
+                </div>
+            </div>
+        </div>
+         <!-- Digital Marketing Projects -->
+    <section class="marketing-projects">
+        <div class="project-card">
+            <div class="card-body">
+                <h5 class="card-title">Digital Marketing: RukRams Era</h5>
+                <p class="card-text">Developed a full digital strategy for a startup brand, including content planning, visual branding, social media management, and post engagement tracking. Enhanced Instagram reach by 300% organically in 30 days.</p>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="card-body">
+                <h5 class="card-title">Digital Marketing: Ekopolystone</h5>
+                <p class="card-text">Managed and executed digital campaigns for Ekopolystone’s regional launch. Created Instagram creatives, ran Meta Ads, and optimized Google Business Profile for local SEO. Resulted in 75% increase in inquiries within 3 weeks.</p>
+            </div>
+        </div>
+    </section>
+    </section>
+</div>
+{% endblock %}

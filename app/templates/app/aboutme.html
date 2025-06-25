@@ -1,0 +1,275 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    margin-top: 20px;
+    background: url("{% static 'app/images/background_image.jpg' %}") no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Poppins', sans-serif;
+    color: #222;
+  }
+
+  .about-section {
+    opacity: 0;
+    animation: fadeIn 0.1s ease-in forwards;
+    animation-delay: 0.2s;
+    padding-top: 100px;
+  }
+
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+    }
+  }
+
+  .main-intro {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+
+  .profile-img {
+    max-width: 220px;
+    border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    transition: transform 0.3s ease;
+  }
+
+  .profile-img:hover {
+    transform: scale(1.05);
+  }
+
+  .intro-text {
+    max-width: 500px;
+  }
+
+  .intro-text h4 {
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+    color: #000;
+  }
+
+  .intro-text p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+  }
+
+  .section-wrapper {
+    max-width: 900px;
+    margin: 0 auto 50px;
+    padding: 0 20px;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 12px;
+    padding-left: 10px;
+    border-left: 4px solid #444;
+  }
+
+  .section-subtitle {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 12px 0 8px;
+    color: #222;
+  }
+
+  .section-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    padding: 25px;
+    transition: transform 0.3s ease;
+  }
+
+  .section-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .section-card ul {
+    padding-left: 20px;
+    margin-bottom: 10px;
+  }
+
+  .section-card li {
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #222;
+  }
+
+  .section-card a {
+    color: #1a73e8;
+    text-decoration: none;
+  }
+
+  .section-card a:hover {
+    text-decoration: underline;
+  }
+
+  .section-card p {
+    font-size: 1rem;
+    color: #222;
+    margin-bottom: 10px;
+  }
+
+  .fade-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-in-out;
+  }
+
+  .fade-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .cert-link {
+    color: inherit;
+    text-decoration: none;
+    font-size: 1rem;
+    display: inline-block;
+  }
+
+  .cert-link:hover {
+    color: #000;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+</style>
+
+<!-- JS for Section Reveal on Scroll -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll(".fade-section").forEach(section => {
+      observer.observe(section);
+    });
+  });
+</script>
+
+<!-- About Me Content -->
+<div class="container about-section">
+
+  <!-- Profile and Intro -->
+  <div class="main-intro fade-section">
+    <img src="{% static 'app/images/profile.jpg' %}" alt="Profile" class="img-fluid profile-img">
+    <div class="intro-text">
+      <h4>Sandeep Ganjala</h4>
+      <p class="text-muted">B.Tech Student | Web Developer | Tech Explorer</p>
+      <p>
+                I’m a tech enthusiast and a self-taught developer currently pursuing my B.Tech. I enjoy building clean, scalable web apps. Skilled in digital marketing, business analysis, and Cinematography, I enjoy solving problems and creating meaningful tech solutions.
+      </p>
+    </div>
+  </div>
+
+  <!-- Education Section -->
+  <div class="section-wrapper fade-section">
+    <div class="section-title">Academic Background</div>
+    <div class="section-card" style="padding: 30px; display: flex; flex-direction: column; gap: 24px;">
+
+      <!-- B.Tech Block -->
+      <div style="background: #ffffffdd; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);">
+        <h5 style="margin: 0 0 12px; font-weight: 600; font-size: 1.2rem;">B.Tech  (2022-2026)</h5>
+        <div style="display: grid; row-gap: 8px;">
+          <p><strong>Institution:</strong> KL University, Vijayawada</p>
+          <p><strong>Branch:</strong> Computer Science And Engineering</p>
+          <p><strong>CGPA:</strong> 9.3</p>
+        </div>
+      </div>
+
+      <!-- Intermediate Block -->
+      <div style="background: #ffffffdd; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);">
+        <h5 style="margin: 0 0 12px; font-weight: 600; font-size: 1.2rem;">Intermediate  (2020-2022)</h5>
+        <div style="display: grid; row-gap: 8px;">
+          <p><strong>Institution:</strong> Sri Chaitanya Junior College, Vijayawada</p>
+          <p><strong>Percentage:</strong> 95.7%</p>
+        </div>
+      </div>
+
+      <!-- SSC Block -->
+      <div style="background: #ffffffdd; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);">
+        <h5 style="margin: 0 0 12px; font-weight: 600; font-size: 1.2rem;">SSC  (2019-2020)</h5>
+        <div style="display: grid; row-gap: 8px;">
+          <p><strong>School:</strong> Sri Vijaya High School</p>
+          <p><strong>CGPA:</strong> 10</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Certifications Section -->
+  <div class="section-wrapper fade-section">
+    <div class="section-title">Certifications</div>
+    <div class="section-card">
+      <ul>
+        <li>AWS Certified Cloud Practitioner</li>
+        <li>Red Hat Certified Java Enterprise Application Developer</li>
+        <li>SalesForce AI Associate</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Achievements -->
+  <div class="section-wrapper fade-section">
+    <div class="section-title">Achievements</div>
+    <div class="section-card">
+      <ul>
+        <li>Awarded a concession of nearly ₹90,000 over four years of academic excellence</li>
+        <li>Written and Directed two shortfilm projects</li>
+        <li>Earned morethan ₹1,00,000 at the age of 20</li>
+
+
+      </ul>
+    </div>
+  </div>
+
+  <!-- Extracurricular -->
+  <div class="section-wrapper fade-section">
+    <div class="section-title">Extracurricular Activities</div>
+    <div class="section-card">
+      <ul>
+        <li>Film Making</li>
+        <li>Digital Marketing</li>
+        <li>Ad Making</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Hobbies -->
+  <div class="section-wrapper fade-section">
+    <div class="section-title">Hobbies</div>
+    <div class="section-card">
+      <ul>
+        <li>Analyzing Trends & Crafting Marketing Strategies</li>
+        <li>Story Writing </li>
+        <li>Photography</li>
+        <li>Cooking</li>
+
+      </ul>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
