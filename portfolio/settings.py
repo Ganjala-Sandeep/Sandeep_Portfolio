@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-sugn%2ylub#giw4(2maa6sf3-p(l9un7zi%e&0sy25)#5@pnb0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sandeep-portfolio-mbu3.onrender.com']
 
 # Application definition
 
