@@ -1,12 +1,13 @@
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = 'django-insecure-sugn%2ylub#giw4(2maa6sf3-p(l9un7zi%e&0sy25)#5@pnb0'
 
-DEBUG = False  # Change to False in production!
+DEBUG = False  # Change to True only in development
 
-ALLOWED_HOSTS = ['sandeep-portfolio-mbu3.onrender.com']
+ALLOWED_HOSTS = ['sandeep-portfolio-mbu3.onrender.com', '127.0.0.1', 'localhost']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -20,7 +21,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # WhiteNoise to serve static files
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # ✅ WhiteNoise for static files
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -34,7 +35,7 @@ ROOT_URLCONF = 'portfolio.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # Fixed duplicate 'DIRS' key here
+        'DIRS': [BASE_DIR / 'templates'],  # ✅ Template directory
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -56,10 +57,10 @@ DATABASES = {
 }
 
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',},
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
 LANGUAGE_CODE = 'en-us'
@@ -67,17 +68,17 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
 USE_TZ = True
 
-# Static files configuration
-STATIC_URL = '/static/'  # Ensure this ends with a slash
+# ✅ STATIC FILE CONFIGURATION
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # collectstatic will copy files here
+# ⛔ Removed STATICFILES_DIRS because you don’t have a 'static' folder in BASE_DIR
 
-STATICFILES_DIRS = [BASE_DIR / "static"]  # Your local static folder for development
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'  # ✅ Enables static file caching & compression
 
-STATIC_ROOT = BASE_DIR / "staticfiles"  # Where collectstatic will collect files
-
-# Use WhiteNoise's storage backend for static files compression and caching
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# ✅ MEDIA FILE CONFIGURATION (if you serve user-uploaded files)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
